@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:currency_converter/currency_converter_material_page.dart';
+import 'currency_converter_cupertino_page.dart';
 
 void main(){
-  runApp(MyApp());
+ runApp(const MyApp());
 }
 
 //Type of widgets
