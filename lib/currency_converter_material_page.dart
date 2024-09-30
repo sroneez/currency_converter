@@ -16,6 +16,12 @@ class _CurrencyConverterMaterialPageState extends
        final TextEditingController textEditingController = TextEditingController();
 
       @override
+      void dispose(){
+        textEditingController.dispose();
+        super.dispose();
+      }
+
+      @override
       Widget build (BuildContext context){
  final border = const OutlineInputBorder(
                     borderSide: BorderSide(
@@ -35,26 +41,26 @@ class _CurrencyConverterMaterialPageState extends
         title: const Text('Currency Converter'),
       ),
       body:Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.all(20),
-              // color: Colors.black,
-              child: Text(
-                'BDT ${result.toStringAsFixed(2)}',
-                style: const TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(146, 4, 2, 2),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.all(20),
+                // color: Colors.black,
+                child: Text(
+                  'BDT ${result != 0 ? result.toStringAsFixed(2): result.toStringAsFixed(0)}',
+                  style: const TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w400,
+                    color: Color.fromARGB(146, 4, 2, 2),
+                  ),
                 ),
               ),
-            ),
-            
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField( //it allow user to take input
+              
+              TextField( //it allow user to take input
               controller: textEditingController,
                 style: const TextStyle(
                   color: Colors.black,
@@ -76,10 +82,8 @@ class _CurrencyConverterMaterialPageState extends
                     decimal: true,
                   ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
+              const SizedBox(height: 10,),
+              ElevatedButton(
                 onPressed: () {                  
                  setState(() {
                  result = double.parse(textEditingController.text) * 119;
@@ -94,9 +98,9 @@ class _CurrencyConverterMaterialPageState extends
                   ),
                 ),
                child: const Text('Convert'),
-               ), 
-            ),
-          ],
+               ),
+            ],
+          ),
         ),
       ),
     );
